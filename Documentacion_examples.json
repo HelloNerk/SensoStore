@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Documentación de la API de Inventario
+  version: 1.0.0
+  description: API que proporciona información sobre productos, niveles de existencias y tendencias de compra.
+
+paths:
+  /inventory/products:
+    get:
+      summary: Obtener una lista de productos
+      description: Retorna una lista de todos los productos disponibles.
+      responses:
+        '200':
+          description: Lista de productos obtenida correctamente
+          content:
+            application/json:
+              example:
+                productos:
+                  - id: 1
+                    nombre: Producto A
+                  - id: 2
+                    nombre: Producto B
+
+  /inventory/products/{productId}:
+    get:
+      summary: Obtener un producto específico
+      description: Retorna detalles sobre un producto específico.
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a obtener
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del producto obtenidos correctamente
+          content:
+            application/json:
+              example:
+                id: 1
+                nombre: Producto A
+                descripcion: Descripción del Producto A
+                precio: 19.99
+                ejemplos:
+                  producto_completo:
+                    summary: Ejemplo de producto completo
+                    value:
+                      id: 1
+                      nombre: Producto A
+                      descripcion: Descripción del Producto A
+                      precio: 19.99
+
+  /inventory/levels:
+    get:
+      summary: Obtener los niveles de existencias de todos los productos
+      description: Retorna los niveles de existencias de todos los productos.
+      responses:
+        '200':
+          description: Niveles de existencias obtenidos correctamente
+          content:
+            application/json:
+              example:
+                niveles:
+                  - id: 1
+                    producto: Producto A
+                    existencias: 100
+                  - id: 2
+                    producto: Producto B
+                    existencias: 50
+
+  /inventory/levels/{productId}:
+    get:
+      summary: Obtener los niveles de existencias de un producto específico
+      description: Retorna los niveles de existencias de un producto específico.
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a obtener los niveles de existencias
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Niveles de existencias del producto obtenidos correctamente
+          content:
+            application/json:
+              example:
+                id: 1
+                producto: Producto A
+                existencias: 100
+
+  /trends:
+    get:
+      summary: Obtener las tendencias de compra de todos los productos
+      description: Retorna las tendencias de compra de todos los productos.
+      responses:
+        '200':
+          description: Tendencias de compra obtenidas correctamente
+          content:
+            application/json:
+              example:
+                tendencias:
+                  - id: 1
+                    producto: Producto A
+                    compras_mensuales: 500
+                  - id: 2
+                    producto: Producto B
+                    compras_mensuales: 300
+
+  /trends/{productId}:
+    get:
+      summary: Obtener las tendencias de compra de un producto específico
+      description: Retorna las tendencias de compra de un producto específico.
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a obtener las tendencias de compra
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tendencias de compra del producto obtenidas correctamente
+          content:
+            application/json:
+              example:
+                id: 1
+                producto: Producto A
+                compras_mensuales: 500
